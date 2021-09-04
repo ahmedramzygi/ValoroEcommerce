@@ -1,17 +1,25 @@
 
 import React,{useState,useEffect} from 'react'
 import {commerce }from './lib/commerce'
-import{Navbar} from './components'
+import{Products,Navbar} from './components'
+
 
 const App = () => {
   const [products,setProducts]=useState([]);
   const fetchProducts=async()=>{
-    const response =await commerce.products.list()// Promise products fetched from API
+    const {data} =await commerce.products.list()// Promise products fetched from API
+    setProducts(data)
   }
+
+  useEffect(()=>{
+    fetchProducts();
+  },[])//Gets rendered first time only
+console.log(products)
+
   return ( 
     <div>
       <Navbar/>
-      
+      <Products products={products}/>
     </div>
    );
 }
