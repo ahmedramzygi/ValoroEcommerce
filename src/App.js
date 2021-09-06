@@ -20,7 +20,7 @@ console.log(products)
     <div>
       <Navbar/>
       <Products products={products}/>
-      <Navbar/>
+      <Navbar nav/>
     </div>
    );
 }
