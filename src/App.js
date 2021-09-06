@@ -21,7 +21,7 @@ console.log(products)
       <Navbar/>
       <Products products={products}/>
       <Navbar />
-      <Navbar />
+      <Navbar nav />
     </div>
    );
 }
