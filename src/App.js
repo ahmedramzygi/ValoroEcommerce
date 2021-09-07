@@ -1,16 +1,23 @@
 
 import React,{useState,useEffect} from 'react'
 import {commerce }from './lib/commerce'
-import{Products,Navbar, Cart} from './components'
+import{ Products,Navbar, Cart, Checkout } from './components'
 import { BrowserRouter as Router, Switch, Route  } from 'react-router-dom'
+import { CssBaseline } from '@material-ui/core';
 
 
 const App = () => {
+
+  const [mobileOpen, setMobileOpen] = React.useState(false);
   const [products,setProducts]=useState([]);
 
-  
+
   //Cart
   const [cart,setCart]=useState({});
+
+  //Checkout
+  const [order, setOrder] = useState({});
+  const {errorMessage, setErrorMessage} = useState({});
 
   const fetchCarts=async()=>{
     setCart(await commerce.cart.retrieve())
@@ -46,18 +53,38 @@ const App = () => {
     setCart(response.cart);
   };
 
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  }
+
+  const handleCaptureCheckout = async (checkoutTokenID, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(checkoutTokenID, newOrder)
+
+      setOrder(incomingOrder);
+      refreshCart();
+    }
+    catch (error){
+      setErrorMessage(error.data.error.message);
+  }
+}
+
+
   useEffect(()=>{
     fetchProducts();
     fetchCarts();
   },[])//Gets rendered first time only
     console.log(cart);
 
+    const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+
   return ( 
     <Router>
-    <div>
-      <Navbar totalItems = {cart.total_items}/>
+    <div style={{ display: 'flex' }}>
+        <CssBaseline />
+      <Navbar totalItems = {cart.total_items} handleDrawerToggle={handleDrawerToggle} />
       <Switch>
-
         <Route exact path = "/">
           <Products products={products} addCart = {AddtoCart}/> 
         </Route>
@@ -70,13 +97,13 @@ const App = () => {
             handleEmptyCart = {handleEmptyCart}
             /> 
         </Route>
-
-      </Switch>
- 
-      
+        <Route exact path="/checkout">
+        <Checkout cart={cart} order={order} onCaptureCheckout={handleCaptureCheckout} error={errorMessage} />
+          </Route>
+        </Switch>
     </div>
     </Router>
    );
-}
+};
  
 export default App;
