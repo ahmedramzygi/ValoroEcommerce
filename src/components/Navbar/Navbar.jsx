@@ -1,6 +1,6 @@
 import React from 'react'
 //Import needed features from material UI for text buttons ,,etc
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Badge, Typography } from '@material-ui/core';
 //Import the shopping cart badge 
 import { ShoppingCart } from '@material-ui/icons';
 import logo from '../../assets/logo.png';
@@ -20,7 +20,7 @@ const Navbar = ({totalItems}) => {
                     </Typography>
                     {/* Here is the mid of navbar of empty space */}
                     <div className={classes.grow}/>
-                   
+                   {/* To show the cart logo with number of products just in cart page */}
                    {location.pathname === "/" && (
                     <div className={classes.button}>
                     <IconButton aria-label="Show cart items" color="inherit" component={Link} to = "/cart">

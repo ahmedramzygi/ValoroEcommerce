@@ -14,24 +14,22 @@ const App = () => {
 
   //Cart
   const [cart,setCart]=useState({});
-
   //Checkout
   const [order, setOrder] = useState({});
   const {errorMessage, setErrorMessage} = useState({});
 
+  // Promise products fetched from API
+  const fetchProducts=async()=>{
+    const {data} =await commerce.products.list()
+    setProducts(data)
+  }
+// Promise function to fetch cart from API
   const fetchCarts=async()=>{
     setCart(await commerce.cart.retrieve())
   }
-
-
-  const fetchProducts=async()=>{
-    const {data} =await commerce.products.list()// Promise products fetched from API
-    setProducts(data)
-  }
-
+// Promise function to add products with quantity to cart using the API
   const AddtoCart = async (productId, quant) => {
     const item = await commerce.cart.add(productId, quant);
-
     setCart(item.cart);
   }
 
@@ -70,12 +68,12 @@ const App = () => {
   }
 }
 
-
+//----------------------------------------------
   useEffect(()=>{
     fetchProducts();
     fetchCarts();
   },[])//Gets rendered first time only
-    console.log(cart);
+  
 
     const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
 
