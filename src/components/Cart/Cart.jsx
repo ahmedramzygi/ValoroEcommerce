@@ -9,7 +9,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
 //Sub component 
   const renderEmptyCart = () => (
     <Typography variant="h6"color="textPrimary"align="center">There is no products in your shopping cart    
-      <Link className={classes.link} to="/" > Now add your products !</Link>
+      <Link className={classes.link} to="/products" > Now add your products !</Link>
     </Typography>
   );
 //If we didnt fetch items yet

@@ -1,41 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 * {
   box-sizing: border-box;
   margin: 0;
@@ -43,7 +5,7 @@
   font-family: "Nunito", sans-serif;
 }
 
-button {
+.buttonL {
   border: none;
   outline: none;
   width: 100%;
@@ -58,8 +20,8 @@ button {
 .login {
   width: 100%;
   min-height: 100vh;
-  padding: 0 20px;
-  background: #e9e9e9;
+  padding: 0 600px;
+  background-image:url("./assets/back.jpg");
   display: flex;
 }
 
@@ -67,7 +29,7 @@ button {
   padding: 60px;
   margin: auto;
   width: 100%;
-  max-width: 520px;
+  max-width: 7000px;
   min-height: 600px;
   display: flex;
   flex-direction: column;
@@ -90,18 +52,18 @@ button {
 }
 
 .login .loginContainer input {
-  width: 100%;
+  width: 110%;
   border: none;
   outline: none;
-  font-size: 19px;
+  font-size: 18px;
   padding: 10px;
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  letter-spacing: 1px;
+  letter-spacing: 0.10px;
 }
 
 .login .loginContainer .btnContainer {
-  width: 100%;
+  width: 110%;
   padding: 24px 0;
 }
 
@@ -127,34 +89,4 @@ button {
 .login .loginContainer .errorMsg {
   color: red;
   font-size: 16px;
-}
-
-.hero {
-  width: 100%;
-  min-height: 100vh;
-  background: radial-gradient(
-    ellipse at left bottom,
-    rgba(22, 24, 47, 1) 0%,
-    rgba(38, 20, 72, 0.9) 59%,
-    rgba(17, 27, 75, 0.9) 100%
-  );
-}
-
-.hero nav {
-  background: #603bbb;
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.hero nav h2 {
-  color: #fff;
-}
-
-.hero nav button {
-  width: 86px;
-  padding: 8px 0;
-  background: #3a2b58;
 }

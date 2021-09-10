@@ -10,7 +10,7 @@ const CardItem = ({item, handleUpdateCartQty, handleRemoveFromCart})=>{
                 <CardMedia image = {item.media.source} alt={item.name} className={classes.media}/>
                 <CardContent className= {classes.cardContent} >
                     <Typography><h4>{item.name}</h4></Typography>
-                    <Typography><h5>{item.name}</h5></Typography>
+                    <Typography><h5>${item.price.formatted}</h5></Typography>
                 </CardContent>
                 <CardActions className={classes.CardActions} >
                     <div className={classes.buttons}>

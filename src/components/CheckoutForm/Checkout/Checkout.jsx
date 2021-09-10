@@ -6,7 +6,7 @@ import { commerce } from '../../../lib/commerce';
 import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 import useStyles from './styles';
-
+//Paper steps for checkout form
 const steps = ['Shipping address', 'Payment details'];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
@@ -21,6 +21,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
   useEffect(() => {
     if (cart.id) {
+      //We will generate a token as soon as the user enters the checkout form
       const generateToken = async () => {
         try {
           const token = await commerce.checkout.generateToken(cart.id, { type: 'cart' });
