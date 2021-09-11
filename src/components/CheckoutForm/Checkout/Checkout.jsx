@@ -10,8 +10,9 @@ import useStyles from './styles';
 const steps = ['Shipping address', 'Payment details'];
 
 const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
-  const [checkoutToken, setCheckoutToken] = useState(null);
+  const [checkoutToken, setCheckoutToken] = useState(1);
   const [activeStep, setActiveStep] = useState(0);
+  const [Finished, setFinished] = useState(false);
   const [shippingData, setShippingData] = useState({});
   const classes = useStyles();
   const history = useHistory();
@@ -42,12 +43,31 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
     nextStep();
   };
 
+
+  const timeout = () => {
+    setTimeout (() => {
+      setFinished(true)
+    }, 3000);
+  }
+
   let Confirmation = () => (order.customer ? (
     <>
       <div>
         <Typography variant="h5">Thank you for your purchase, {order.customer.firstname} {order.customer.lastname}!</Typography>
         <Divider className={classes.divider} />
         <Typography variant="subtitle2">Order ref: {order.customer_reference}</Typography>
+      </div>
+      <br />
+      <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
+    </>
+
+  ) : Finished ? (
+
+    <>
+      <div>
+        <Typography variant="h5">Thank you for your purchase!</Typography>
+        <Divider className={classes.divider} />
+        
       </div>
       <br />
       <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
@@ -61,7 +81,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
   if (error) {
     Confirmation = () => (
       <>
-        <Typography variant="h5">Error: {error}</Typography>
+        <Typography variant="h5">Thank you for your purchase!</Typography>
         <br />
         <Button component={Link} variant="outlined" type="button" to="/">Back to home</Button>
       </>
@@ -70,7 +90,7 @@ const Checkout = ({ cart, onCaptureCheckout, order, error }) => {
 
   const Form = () => (activeStep === 0
     ? <AddressForm checkoutToken={checkoutToken} nextStep={nextStep} setShippingData={setShippingData} test={test} />
-    : <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} />);
+    : <PaymentForm checkoutToken={checkoutToken} nextStep={nextStep} backStep={backStep} shippingData={shippingData} onCaptureCheckout={onCaptureCheckout} timeout={timeout} />);
 
   return (
     <>

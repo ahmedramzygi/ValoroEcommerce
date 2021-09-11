@@ -127,7 +127,7 @@ const authListener=()=>{
   }
 //Checkout
   const [order, setOrder] = useState({});
-  const {errorMessage, setErrorMessage} = useState({});
+  const [errorMessage, setErrorMessage] = useState({});
   const handleCaptureCheckout = async (checkoutTokenID, newOrder) => {
     try {
       const incomingOrder = await commerce.checkout.capture(checkoutTokenID, newOrder)
